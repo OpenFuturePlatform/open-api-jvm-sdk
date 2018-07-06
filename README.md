@@ -1,6 +1,6 @@
 # OpenJ
 
-OpenJ is a library for interactions with Open Platform.
+OpenJ is a library for interaction with Open Platform.
 
 ## Content
 
@@ -48,7 +48,7 @@ limit     |Int   | Page limit
 
 Attribute | Type | Description
 ----------|------|-----------
-totalCount|Long  | Total count of entities in database
+totalCount|Long  | Total count of entities in a database
 list      |T[]   | List of entities with type T (T is generic)
 
 
@@ -65,7 +65,7 @@ fiatAmount      |String                                               | Scaffold
 currency        |String                                               | Fiat amount currency
 conversionAmount|String                                               | Fiat amount converted to ethereum 
 developerAddress|String                                               | Scaffold developer address
-webHook         |String                                               | Scaffold web hook for events
+webHook         |String                                               | Scaffold webhook for events
 properties      |[ScaffoldProperty](#scaffold-properties-attributes)[]| Scaffold properties
 
 #### Scaffold properties attributes
@@ -104,7 +104,7 @@ fiatAmount      |String                                               | Scaffold
 currency        |String                                               | Fiat amount currency
 conversionAmount|String                                               | Fiat amount converted to ethereum 
 developerAddress|String                                               | Scaffold developer address
-webHook         |String                                               | Scaffold web hook for events
+webHook         |String                                               | Scaffold webhook for events
 properties      |[ScaffoldProperty](#scaffold-properties-attributes)[]| Scaffold properties
 
 #### Set web hook request
@@ -112,37 +112,37 @@ properties      |[ScaffoldProperty](#scaffold-properties-attributes)[]| Scaffold
 Attribute       | Type                                                | Description
 ----------------|-----------------------------------------------------|-----------
 address         |String                                               | Scaffold address
-webHook         |String                                               | Scaffold web hook for events
+webHook         |String                                               | Scaffold webhook for events
 
 
-### Share holder
+### Shareholder
 
-#### Share holder attributes
-
-Attribute       | Type                                                | Description
-----------------|-----------------------------------------------------|-----------
-address         |String                                               | Share holder address
-percent         |Int                                                  | Share holder percent
-
-#### Add share holder request
+#### Shareholder attributes
 
 Attribute       | Type                                                | Description
 ----------------|-----------------------------------------------------|-----------
-address         |String                                               | Share holder address
-percent         |Int                                                  | Share holder percent
+address         |String                                               | Shareholder address
+percent         |Int                                                  | Shareholder percent
 
-#### Update share holder request
-
-Attribute       | Type                                                | Description
-----------------|-----------------------------------------------------|-----------
-address         |String                                               | Share holder address
-percent         |Int                                                  | Share holder percent
-
-#### Remove share holder request
+#### Add shareholder request
 
 Attribute       | Type                                                | Description
 ----------------|-----------------------------------------------------|-----------
-address         |String                                               | Share holder address
+address         |String                                               | Shareholder address
+percent         |Int                                                  | Shareholder percent
+
+#### Update shareholder request
+
+Attribute       | Type                                                | Description
+----------------|-----------------------------------------------------|-----------
+address         |String                                               | Shareholder address
+percent         |Int                                                  | Shareholder percent
+
+#### Remove shareholder request
+
+Attribute       | Type                                                | Description
+----------------|-----------------------------------------------------|-----------
+address         |String                                               | Shareholder address
 
 ### Transaction
 
@@ -156,7 +156,7 @@ event           |[Event](#event)                                      | Event
 
 ### Event
 
-Each event has field `type` which define event type
+Each event has field `type` which define an event type
 
 #### Activate scaffold event
 
@@ -184,8 +184,8 @@ type            |String                                               |"DELETED_
 
 Attribute       | Type                                                | Description
 ----------------|-----------------------------------------------------|-----------
-userAddress     |String                                               |Share holder address
-partnerShare    |BigInteger                                           |Share holder share
+userAddress     |String                                               |Shareholder address
+partnerShare    |BigInteger                                           |Shareholder share
 type            |String                                               |"EDITED_SHARE_HOLDER"
 
 #### Funds deposited event
@@ -196,20 +196,20 @@ amount          |BigInteger                                           |Funds amo
 toAddress       |String                                               |To address
 type            |String                                               |"FUNDS_DEPOSITED"
 
-#### Payed for share holder event
+#### Paid for shareholder event
 
 Attribute       | Type                                                | Description
 ----------------|-----------------------------------------------------|-----------
-userAddress     |String                                               |Share holder address
-amount          |BigInteger                                           |Payed amount
-type            |String                                               |"PAYED_FOR_SHARE_HOLDER"
+userAddress     |String                                               |Shareholder address
+amount          |BigInteger                                           |Paid amount
+type            |String                                               |"PAID_FOR_SHARE_HOLDER"
 
 #### Payment completed event
 
 Attribute               | Type                                                | Description
 ------------------------|-----------------------------------------------------|-----------
 customerAddress         |String                                               |Customer address
-transactionAmount       |BigInteger                                           |Payed amount
+transactionAmount       |BigInteger                                           |Paid amount
 scaffoldTransactionIndex|BigInteger                                           |Transaction index
 properties              |Map<String, Any>                                     |Transaction properties
 type                    |String                                               |"PAYMENT_COMPLETED"
@@ -218,7 +218,7 @@ type                    |String                                               |"
 
 ## API
 
-`sender` - object that produce requests for each entity type
+`sender` - an object that produces requests for each entity type
 
 ### Scaffold
 
@@ -282,7 +282,7 @@ Scaffold scaffold = sender.deploy(new DeployScaffoldRequest(openKey, developerAd
 
 `Response entity is` [Scaffold](#scaffold-attributes)
 
-#### Set web hook
+#### Set webhook
 
 > Kotlin:
 ```kotlin
@@ -345,7 +345,7 @@ ScaffoldQuota quota = sender.quota()
 `Response entity is` [ScaffoldQuota](#quota-attributes)
 
 
-### Share holder
+### Shareholder
 
 > Kotlin:
 ```kotlin
