@@ -22,7 +22,7 @@ abstract class BaseSender(
         private val token: String
 ) {
 
-    private val openRoute = "http://localhost:8080$baseRoute"
+    private val openRoute = "https://api.openfuture.io$baseRoute"
     private val mapper: ObjectMapper = jacksonObjectMapper()
 
 
