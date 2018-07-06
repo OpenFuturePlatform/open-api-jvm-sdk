@@ -11,7 +11,7 @@ import io.openfuture.api.domain.event.EventType.ADDED_SHARE_HOLDER
 import io.openfuture.api.domain.event.EventType.DELETED_SHARE_HOLDER
 import io.openfuture.api.domain.event.EventType.EDITED_SHARE_HOLDER
 import io.openfuture.api.domain.event.EventType.FUNDS_DEPOSITED
-import io.openfuture.api.domain.event.EventType.PAYED_FOR_SHARE_HOLDER
+import io.openfuture.api.domain.event.EventType.PAID_FOR_SHARE_HOLDER
 import io.openfuture.api.domain.event.EventType.PAYMENT_COMPLETED
 import java.math.BigInteger
 
@@ -22,7 +22,7 @@ import java.math.BigInteger
         Type(value = DeletedShareHolderEvent::class, name = DELETED_SHARE_HOLDER),
         Type(value = EditedShareHolderEvent::class, name = EDITED_SHARE_HOLDER),
         Type(value = FundsDepositedEvent::class, name = FUNDS_DEPOSITED),
-        Type(value = PayedForShareHolderEvent::class, name = PAYED_FOR_SHARE_HOLDER),
+        Type(value = PayedForShareHolderEvent::class, name = PAID_FOR_SHARE_HOLDER),
         Type(value = PaymentCompletedEvent::class, name = PAYMENT_COMPLETED)
 )
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -56,7 +56,7 @@ data class FundsDepositedEvent(
 data class PayedForShareHolderEvent(
         val userAddress: String,
         val amount: BigInteger
-) : Event(PAYED_FOR_SHARE_HOLDER)
+) : Event(PAID_FOR_SHARE_HOLDER)
 
 data class PaymentCompletedEvent(
         val customerAddress: String,
