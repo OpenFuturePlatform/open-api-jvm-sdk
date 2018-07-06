@@ -1,0 +1,13 @@
+package io.openfuture.api.domain.event
+
+object EventType {
+
+    const val PAYMENT_COMPLETED = "PAYMENT_COMPLETED"
+    const val FUNDS_DEPOSITED = "FUNDS_DEPOSITED"
+    const val ACTIVATED_SCAFFOLD = "ACTIVATED_SCAFFOLD"
+    const val ADDED_SHARE_HOLDER = "ADDED_SHARE_HOLDER"
+    const val EDITED_SHARE_HOLDER = "EDITED_SHARE_HOLDER"
+    const val DELETED_SHARE_HOLDER = "DELETED_SHARE_HOLDER"
+    const val PAYED_FOR_SHARE_HOLDER = "PAYED_FOR_SHARE_HOLDER"
+
+}
