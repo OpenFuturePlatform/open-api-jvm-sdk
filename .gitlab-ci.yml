@@ -29,7 +29,7 @@ push-jar:
   script:
     - mkdir .gradle
     - echo "$GPG_KEY3" > private.key
-    - echo ${GPG_PASS} | gpg --import private.key
+    - echo "$GPG_PASS" | gpg --batch --import private.key
     - gpg --export-secret-keys -o secring.gpg
     - echo "$GRADLE_PROPERTIES3" > $GRADLE_USER_HOME/gradle.properties
     - ./gradlew assemble
