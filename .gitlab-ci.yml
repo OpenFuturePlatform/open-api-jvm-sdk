@@ -27,8 +27,8 @@ build-jar:
   before_script:
     - export GRADLE_USER_HOME=`pwd`/.gradle
   script:
-    - echo ${GPG_KEY_PRIVATE} | tr -d '\r' > private.key
-    - echo ${GPG_KEY_PUBLIC} | tr -d '\r' > public.key
+    - echo "$GPG_KEY_PRIVATE" > private.key
+    - echo "$GPG_KEY_PUBLIC" > public.key
     - gpg --import public.key
     - gpg --import private.key
     - gpg -K
