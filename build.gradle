@@ -1,13 +1,8 @@
-buildscript {
 plugins {
     id "idea"
     id "org.jetbrains.kotlin.jvm" version "1.2.50"
     id "org.jetbrains.kotlin.kapt" version "1.2.50"
 }
-
-group = 'io.openfuture'
-version = '1.0.0'
-sourceCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
     mavenCentral()
@@ -32,11 +27,19 @@ compileKotlin {
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
-}
+
+
+group = 'io.openfuture'
+version = '1.0.0'
+sourceCompatibility = JavaVersion.VERSION_1_8
+
+
+
+
+
 
 apply plugin: 'maven'
 apply plugin: 'signing'
-
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
@@ -54,15 +57,25 @@ artifacts {
     archives sourcesJar
 }
 
-signing {
-    sign configurations.archives
+//signing {
+ //   sign configurations.archives
+//}
+
+if (project.hasProperty('sign')) {
+    signing {
+        sign configurations.archives
+    }
 }
 
 uploadArchives {
   repositories {
     mavenDeployer {
-      beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-
+   //   beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+      if (project.hasProperty('sign')) {
+        beforeDeployment {
+            MavenDeployment deployment -> signPom(deployment)
+        }
+      }
       repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
         authentication(userName: ossrhUsername, password: ossrhPassword)
       }

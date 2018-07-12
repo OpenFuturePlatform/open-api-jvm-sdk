@@ -30,5 +30,6 @@ push-jar:
     - echo "$GPG_KEY_PRIVATE" > private.key
     - gpg --import private.key
     - mkdir .gradle
+    - gpg --keyring pubring.kbx --export-secret-keys > $GRADLE_USER_HOME/ringfile.gpg
     - echo "$GRADLE_PROPERTIES" > $GRADLE_USER_HOME/gradle.properties
     - ./gradlew assemble
