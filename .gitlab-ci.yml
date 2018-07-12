@@ -32,3 +32,4 @@ push-jar:
     - gpg --import $GRADLE_USER_HOME/private.key
     - echo "$GRADLE_PROPERTIES" > $GRADLE_USER_HOME/gradle.properties
     - ./gradlew assemble
+    - ./gradlew -Psign uploadArchives
