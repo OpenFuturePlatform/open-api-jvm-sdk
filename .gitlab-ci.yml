@@ -30,6 +30,6 @@ push-jar:
     - echo "$GPG_KEY_PRIVATE" > private.key
     - gpg --import private.key
     - mkdir ~/.gradle
-    - echo "$GRADLE_PROPERTIES" > ~/.gradle/gradle.properties
+    - echo "$GRADLE_PROPERTIES" > $GRADLE_USER_HOME/gradle.properties
     - cat ~/.gradle/gradle.properties
     - ./gradlew assemble
