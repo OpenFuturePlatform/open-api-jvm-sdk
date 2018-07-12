@@ -2,10 +2,12 @@ image: openjdk:8-jdk
 
 stages:
   - build
-  - package
+  - publish
 
-
-build-jar:
+###################
+# Build
+###################
+.build-jar:
   stage: build
   before_script:
     - export GRADLE_USER_HOME=`pwd`/.gradle
@@ -14,5 +16,17 @@ build-jar:
   artifacts:
     paths:
       - build/libs/*.jar
-    expire_in: 1 week
+    expire_in: 5 minute
 
+
+###################
+# Publish
+###################
+build-jar:
+  stage: publish
+  before_script:
+    - export GRADLE_USER_HOME=`pwd`/.gradle
+  script:
+    - echo ${GPG_KEY_PRIVATE} > private.key
+    - gpg --allow-secret-key-import --import private.key
+    - gpg -K
