@@ -22,11 +22,14 @@ stages:
 ###################
 # Publish
 ###################
-build-jar:
+push-jar:
   stage: publish
   before_script:
     - export GRADLE_USER_HOME=`pwd`/.gradle
   script:
     - echo "$GPG_KEY_PRIVATE" > private.key
     - gpg --import private.key
-    - gpg -K
+    - mkdir ~/.gradle
+    - echo "$GRADLE_PROPERTIES" > ~/.gradle/gradle.properties
+    - cat ~/.gradle/gradle.properties
+    - ./gradlew assemble

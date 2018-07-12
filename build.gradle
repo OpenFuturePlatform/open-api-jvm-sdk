@@ -12,6 +12,7 @@ repositories {
     mavenCentral()
 }
 
+
 dependencies {
     // Kotlin
     compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.50")
@@ -29,4 +30,73 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from 'build/docs/javadoc'
+}
+ 
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+artifacts {
+    archives jar
+    archives javadocJar
+    archives sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+      repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+        authentication(userName: ossrhUsername, password: ossrhPassword)
+      }
+
+      snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+        authentication(userName: ossrhUsername, password: ossrhPassword)
+      }
+
+      pom.project {
+        name 'open-api-jvm-sdk'
+        packaging 'jar'
+        // optionally artifactId can be defined here 
+        description 'A application used as an example on how to set up 
+          pushing  its components to the Central Repository.'
+
+        scm {
+          connection 'scm:git@github.com:OpenFuturePlatform/open-api-jvm-sdk.git'
+          developerConnection 'scm:git@github.com:OpenFuturePlatform/open-api-jvm-sdk.git'
+          url 'scm:git@github.com:OpenFuturePlatform/open-api-jvm-sdk.git'
+        }
+
+        licenses {
+          license {
+            name 'The Apache License, Version 2.0'
+            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+          }
+        }
+
+        developers {
+          developer {
+            id 'openplatform'
+            name 'Open Platform'
+            email 'openplatform@zensoft.io'
+          }
+        }
+      }
+    }
+  }
 }
