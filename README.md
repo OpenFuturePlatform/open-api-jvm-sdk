@@ -15,8 +15,15 @@ OpenJ is a library for interaction with Open Platform.
 
 Using gradle:
 
+compile("io.openfuture:sdk:1.0.0")
+
 Using maven:
 
+<dependency>
+    <groupId>io.openfuture</groupId>
+    <artifactId>sdk</artifactId>
+    <version>1.0.0</version>
+</dependency>
 
 ## Get started
 
