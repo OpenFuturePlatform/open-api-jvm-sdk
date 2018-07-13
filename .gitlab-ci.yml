@@ -4,18 +4,25 @@ stages:
   - build
   - publish
 
+before_script:
+  - export GRADLE_USER_HOME=`pwd`/.gradle
+  - apt update && apt install gettext-base
+
 
 ###################
 # Build
 ###################
-.build-jar:
+build-jar:
   stage: build
-  before_script:
-    - export GRADLE_USER_HOME=`pwd`/.gradle
   script:
+    - export TAG=0.0.1
+    - envsubst '${TAG}' < build.gradle > build.gradle.new
+    - mv build.gradle.new build.gradle
     - mkdir .gradle
-    - echo "$GRADLE_PROPERTIES3" > $GRADLE_USER_HOME/gradle.properties
+    - echo "$GRADLE_PROPERTIES" > $GRADLE_USER_HOME/gradle.properties
     - ./gradlew assemble
+  except:
+    - tags
 
 
 ###################
@@ -23,12 +30,17 @@ stages:
 ###################
 push-jar:
   stage: publish
-  before_script:
-    - export GRADLE_USER_HOME=`pwd`/.gradle
   script:
+    - TAG=$(echo ${CI_COMMIT_REF_NAME} | sed "s/v//")
+    - export TAG=$TAG
+    - envsubst '${TAG}' < build.gradle > build.gradle.new
+    - mv build.gradle.new build.gradle
     - mkdir .gradle
     - echo "$GPG_KEY_PRIVATE" > private.key
     - gpg --import private.key
     - gpg --export-secret-keys -o secring.gpg
-    - echo "$GRADLE_PROPERTIES3" > $GRADLE_USER_HOME/gradle.properties
+    - echo "$GRADLE_PROPERTIES" > $GRADLE_USER_HOME/gradle.properties
     - ./gradlew -Psign uploadArchives
+    - ./gradlew closeAndReleaseRepository
+  only:
+    - tags

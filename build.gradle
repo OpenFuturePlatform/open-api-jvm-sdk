@@ -2,6 +2,7 @@ plugins {
     id "idea"
     id "org.jetbrains.kotlin.jvm" version "1.2.50"
     id "org.jetbrains.kotlin.kapt" version "1.2.50"
+    id "io.codearte.nexus-staging" version "0.11.0"
 }
 
 repositories {
@@ -29,7 +30,7 @@ compileTestKotlin {
 
 
 group = 'io.openfuture'
-version = '0.0.1'
+version = '${TAG}'
 sourceCompatibility = JavaVersion.VERSION_1_8
 
 apply plugin: 'maven'
@@ -72,8 +73,9 @@ uploadArchives {
       pom.project {
         name 'open-api-jvm-sdk'
         packaging 'jar'
+        url 'https://github.com/OpenFuturePlatform/open-api-jvm-sdk'
         // optionally artifactId can be defined here 
-        description 'A application used as an example on how to set up pushing  its components to the Central Repository.'
+        description 'Open Platform JVM SDK'
 
         scm {
           connection 'scm:git@github.com:OpenFuturePlatform/open-api-jvm-sdk.git'
@@ -99,3 +101,4 @@ uploadArchives {
     }
   }
 }
+
