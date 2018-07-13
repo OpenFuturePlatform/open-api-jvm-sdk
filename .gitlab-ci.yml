@@ -4,6 +4,12 @@ stages:
   - build
   - publish
 
+cache:
+  paths:
+    - build/
+    - .gradle/wrapper
+    - .gradle/caches
+
 ###################
 # Build
 ###################
@@ -15,11 +21,6 @@ build-jar:
     - mkdir .gradle
     - echo "$GRADLE_PROPERTIES3" > $GRADLE_USER_HOME/gradle.properties
     - ./gradlew assemble
-  cache:
-    paths:
-      - build/
-      - .gradle/wrapper
-      - .gradle/caches
 
 
 ###################
