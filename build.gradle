@@ -72,7 +72,7 @@ uploadArchives {
                 name "open-api-jvm-sdk"
                 packaging "jar"
                 url "https://github.com/OpenFuturePlatform/open-api-jvm-sdk"
-                description "Open Platform JVM SDK"
+                description "OPEN Platform JVM SDK"
 
                 licenses {
                     license {
