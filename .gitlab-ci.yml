@@ -12,6 +12,7 @@ build-jar:
   before_script:
     - export GRADLE_USER_HOME=`pwd`/.gradle
   script:
+    - mkdir .gradle
     - echo "$GRADLE_PROPERTIES3" > $GRADLE_USER_HOME/gradle.properties
     - ./gradlew assemble
   cache:
