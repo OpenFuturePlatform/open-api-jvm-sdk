@@ -4,16 +4,11 @@ stages:
   - build
   - publish
 
-cache:
-  paths:
-    - build/
-    - .gradle/wrapper
-    - .gradle/caches
 
 ###################
 # Build
 ###################
-build-jar:
+.build-jar:
   stage: build
   before_script:
     - export GRADLE_USER_HOME=`pwd`/.gradle
