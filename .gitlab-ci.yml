@@ -7,16 +7,17 @@ stages:
 ###################
 # Build
 ###################
-.build-jar:
+build-jar:
   stage: build
   before_script:
     - export GRADLE_USER_HOME=`pwd`/.gradle
   script:
     - ./gradlew assemble
-  artifacts:
+  cache:
     paths:
-      - build/libs/*.jar
-    expire_in: 5 minute
+      - build/
+      - .gradle/wrapper
+      - .gradle/caches
 
 
 ###################
@@ -32,5 +33,4 @@ push-jar:
     - gpg --import private.key
     - gpg --export-secret-keys -o secring.gpg
     - echo "$GRADLE_PROPERTIES3" > $GRADLE_USER_HOME/gradle.properties
-    - ./gradlew assemble
     - ./gradlew -Psign uploadArchives

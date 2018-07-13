@@ -8,7 +8,6 @@ repositories {
     mavenCentral()
 }
 
-
 dependencies {
     // Kotlin
     compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.50")
@@ -30,13 +29,8 @@ compileTestKotlin {
 
 
 group = 'io.openfuture'
-version = '1.0.0'
+version = '0.0.1'
 sourceCompatibility = JavaVersion.VERSION_1_8
-
-
-
-
-
 
 apply plugin: 'maven'
 apply plugin: 'signing'
@@ -56,10 +50,6 @@ artifacts {
     archives javadocJar
     archives sourcesJar
 }
-
-//signing {
- //   sign configurations.archives
-//}
 
 if (project.hasProperty('sign')) {
     signing {
