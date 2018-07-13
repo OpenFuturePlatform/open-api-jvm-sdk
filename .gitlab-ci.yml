@@ -2,7 +2,7 @@ image: openjdk:8-jdk
 
 stages:
   - build
-  - publish
+  - deploy
 
 before_script:
   - export GRADLE_USER_HOME=`pwd`/.gradle
@@ -14,9 +14,10 @@ before_script:
 ###################
 build-jar:
   stage: build
+  variables:
+    VERSION: build
   script:
-    - export TAG=0.0.1
-    - envsubst '${TAG}' < build.gradle > build.gradle.new
+    - envsubst '${VERSION}' < build.gradle > build.gradle.new
     - mv build.gradle.new build.gradle
     - mkdir .gradle
     - echo "$GRADLE_PROPERTIES" > $GRADLE_USER_HOME/gradle.properties
@@ -26,14 +27,14 @@ build-jar:
 
 
 ###################
-# Publish
+# Deploy
 ###################
-push-jar:
-  stage: publish
+deploy-jar:
+  stage: deploy
   script:
-    - TAG=$(echo ${CI_COMMIT_REF_NAME} | sed "s/v//")
-    - export TAG=$TAG
-    - envsubst '${TAG}' < build.gradle > build.gradle.new
+    - VERSION=$(echo ${CI_COMMIT_REF_NAME} | sed "s/v//")
+    - export VERSION=$VERSION
+    - envsubst '${VERSION}' < build.gradle > build.gradle.new
     - mv build.gradle.new build.gradle
     - mkdir .gradle
     - echo "$GPG_KEY_PRIVATE" > private.key
