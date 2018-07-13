@@ -3,7 +3,13 @@ plugins {
     id "org.jetbrains.kotlin.jvm" version "1.2.50"
     id "org.jetbrains.kotlin.kapt" version "1.2.50"
     id "io.codearte.nexus-staging" version "0.11.0"
+    id "maven"
+    id "signing"
 }
+
+group = "io.openfuture"
+version = '${TAG}'
+sourceCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
     mavenCentral()
@@ -28,22 +34,14 @@ compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
 
-
-group = 'io.openfuture'
-version = '${TAG}'
-sourceCompatibility = JavaVersion.VERSION_1_8
-
-apply plugin: 'maven'
-apply plugin: 'signing'
-
 task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from 'build/docs/javadoc'
+    classifier = "javadoc"
+    from "build/docs/javadoc"
 }
- 
+
 task sourcesJar(type: Jar) {
     from sourceSets.main.allSource
-    classifier = 'sources'
+    classifier = "sources"
 }
 
 artifacts {
@@ -52,53 +50,52 @@ artifacts {
     archives sourcesJar
 }
 
-if (project.hasProperty('sign')) {
+if (project.hasProperty("sign")) {
     signing {
         sign configurations.archives
     }
 }
 
 uploadArchives {
-  repositories {
-    mavenDeployer {
-      beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-      repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-        authentication(userName: ossrhUsername, password: ossrhPassword)
-      }
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
 
-      snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-        authentication(userName: ossrhUsername, password: ossrhPassword)
-      }
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
 
-      pom.project {
-        name 'open-api-jvm-sdk'
-        packaging 'jar'
-        url 'https://github.com/OpenFuturePlatform/open-api-jvm-sdk'
-        // optionally artifactId can be defined here 
-        description 'Open Platform JVM SDK'
+            pom.project {
+                name "open-api-jvm-sdk"
+                packaging "jar"
+                url "https://github.com/OpenFuturePlatform/open-api-jvm-sdk"
+                description "Open Platform JVM SDK"
 
-        scm {
-          connection 'scm:git@github.com:OpenFuturePlatform/open-api-jvm-sdk.git'
-          developerConnection 'scm:git@github.com:OpenFuturePlatform/open-api-jvm-sdk.git'
-          url 'scm:git@github.com:OpenFuturePlatform/open-api-jvm-sdk.git'
+                scm {
+                    connection "scm:git@github.com:OpenFuturePlatform/open-api-jvm-sdk.git"
+                    developerConnection "scm:git@github.com:OpenFuturePlatform/open-api-jvm-sdk.git"
+                    url "scm:git@github.com:OpenFuturePlatform/open-api-jvm-sdk.git"
+                }
+
+                licenses {
+                    license {
+                        name "The Apache License, Version 2.0"
+                        url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                    }
+                }
+
+                developers {
+                    developer {
+                        id "openplatform"
+                        name "Open Platform"
+                        email "openplatform@zensoft.io"
+                    }
+                }
+            }
         }
-
-        licenses {
-          license {
-            name 'The Apache License, Version 2.0'
-            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-          }
-        }
-
-        developers {
-          developer {
-            id 'openplatform'
-            name 'Open Platform'
-            email 'openplatform@zensoft.io'
-          }
-        }
-      }
     }
-  }
 }
 
