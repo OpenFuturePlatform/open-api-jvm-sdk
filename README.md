@@ -40,7 +40,7 @@ val open = OpenJ(token)
 
 > Java:
 ```java
-OpneJ open = new OpenJ(token)
+OpenJ open = new OpenJ(token)
 ```
 
 
