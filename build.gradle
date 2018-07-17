@@ -3,10 +3,13 @@ plugins {
     id "idea"
     id "org.jetbrains.kotlin.jvm" version "1.2.50"
     id "org.jetbrains.kotlin.kapt" version "1.2.50"
+    id "io.codearte.nexus-staging" version "0.11.0"
+    id "maven"
+    id "signing"
 }
 
-group = 'io.openfuture'
-version = '1.0.0'
+group = "io.openfuture"
+version = '${VERSION}'
 sourceCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
@@ -56,3 +59,66 @@ jacocoTestReport {
     }
 }
 check.dependsOn jacocoTestReport
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = "javadoc"
+    from "build/docs/javadoc"
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = "sources"
+}
+
+artifacts {
+    archives jar
+    archives javadocJar
+    archives sourcesJar
+}
+
+if (project.hasProperty("sign")) {
+    signing {
+        sign configurations.archives
+    }
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: '${OSSRHUSERNAME}', password: '${OSSRHPASSWORD}')
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: '${OSSRHUSERNAME}', password: '${OSSRHPASSWORD}')
+            }
+
+            pom.project {
+                name "open-api-jvm-sdk"
+                packaging "jar"
+                url "https://github.com/OpenFuturePlatform/open-api-jvm-sdk"
+                description "OPEN Platform JVM SDK"
+
+                licenses {
+                    license {
+                        name "MIT licence"
+                        url "https://github.com/OpenFuturePlatform/open-api-jvm-sdk/blob/master/LICENCE.txt"
+                    }
+                }
+
+                scm {
+                    url "https://github.com/OpenFuturePlatform/open-api-jvm-sdk"
+                }
+
+                developers {
+                    developer {
+                        id "openplatform"
+                        name "OPEN Platform"
+                    }
+                }
+            }
+        }
+    }
+}
+

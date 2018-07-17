@@ -1,0 +1,81 @@
+image: openjdk:8-jdk
+
+stages:
+  - test
+  - build
+  - deploy
+
+before_script:
+  - export GRADLE_USER_HOME=`pwd`/.gradle
+  - apt update && apt install gettext-base
+
+
+###########################
+# Tests
+###########################
+unit-tests:
+  stage: test
+  image: openjdk:8-jdk
+  variables:
+    VERSION: test
+    OSSRHUSERNAME: ossrhusername
+    OSSRHPASSWORD: ossrhpassword
+  script:
+    - envsubst '${VERSION}','${OSSRHUSERNAME}','${OSSRHPASSWORD}' < build.gradle > build.gradle.new
+    - mv build.gradle.new build.gradle
+    - ./gradlew check
+  after_script:
+    - cat build/reports/jacoco/test/html/index.html
+  coverage: '/Total.*?([0-9]{1,3})%/'
+  cache:
+    paths:
+      - .gradle/wrapper
+      - .gradle/caches
+  artifacts:
+    when: always
+    paths:
+      - build/reports/
+    expire_in: 1 day
+
+
+###################
+# Build
+###################
+build-jar:
+  stage: build
+  variables:
+    VERSION: build
+    OSSRHUSERNAME: ossrhusername
+    OSSRHPASSWORD: ossrhpassword
+  script:
+    - envsubst '${VERSION}','${OSSRHUSERNAME}','${OSSRHPASSWORD}' < build.gradle > build.gradle.new
+    - mv build.gradle.new build.gradle
+    - ./gradlew assemble
+  only:
+    - master
+  except:
+    - tags
+
+
+###################
+# Deploy
+###################
+deploy-jar:
+  stage: deploy
+  variables:
+    OSSRHUSERNAME: ${OSSRH_LOGIN}
+    OSSRHPASSWORD: ${OSSRH_PASS}
+  script:
+    - VERSION=$(echo ${CI_COMMIT_REF_NAME} | sed "s/v//")
+    - export VERSION=$VERSION
+    - envsubst '${VERSION}','${OSSRHUSERNAME}','${OSSRHPASSWORD}' < build.gradle > build.gradle.new
+    - mv build.gradle.new build.gradle
+    - mkdir .gradle
+    - echo "$GPG_KEY_PRIVATE" > private.key
+    - gpg --import private.key
+    - gpg --export-secret-keys -o secring.gpg
+    - echo "$GRADLE_PROPERTIES" > $GRADLE_USER_HOME/gradle.properties
+    - ./gradlew -Psign uploadArchives
+    - ./gradlew closeAndReleaseRepository
+  only:
+    - tags
