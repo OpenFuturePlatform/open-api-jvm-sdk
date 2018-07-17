@@ -51,6 +51,10 @@ build-jar:
     - envsubst '${VERSION}','${OSSRHUSERNAME}','${OSSRHPASSWORD}' < build.gradle > build.gradle.new
     - mv build.gradle.new build.gradle
     - ./gradlew assemble
+  artifacts:
+    paths:
+      - build/libs/*.jar
+    expire_in: 1 day
   only:
     - master
   except:
