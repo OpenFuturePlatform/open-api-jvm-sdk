@@ -13,6 +13,7 @@ import io.openfuture.sdk.domain.event.EventType.EDITED_SHARE_HOLDER
 import io.openfuture.sdk.domain.event.EventType.FUNDS_DEPOSITED
 import io.openfuture.sdk.domain.event.EventType.PAID_FOR_SHARE_HOLDER
 import io.openfuture.sdk.domain.event.EventType.PAYMENT_COMPLETED
+import java.math.BigDecimal
 import java.math.BigInteger
 
 @JsonTypeInfo(use = NAME, include = EXTERNAL_PROPERTY, property = "type")
@@ -22,7 +23,7 @@ import java.math.BigInteger
         Type(value = DeletedShareHolderEvent::class, name = DELETED_SHARE_HOLDER),
         Type(value = EditedShareHolderEvent::class, name = EDITED_SHARE_HOLDER),
         Type(value = FundsDepositedEvent::class, name = FUNDS_DEPOSITED),
-        Type(value = PayedForShareHolderEvent::class, name = PAID_FOR_SHARE_HOLDER),
+        Type(value = PaidForShareHolderEvent::class, name = PAID_FOR_SHARE_HOLDER),
         Type(value = PaymentCompletedEvent::class, name = PAYMENT_COMPLETED)
 )
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -49,18 +50,18 @@ data class EditedShareHolderEvent(
 ) : Event(EDITED_SHARE_HOLDER)
 
 data class FundsDepositedEvent(
-        val amount: BigInteger,
+        val amount: BigDecimal,
         val toAddress: String
 ) : Event(FUNDS_DEPOSITED)
 
-data class PayedForShareHolderEvent(
+data class PaidForShareHolderEvent(
         val userAddress: String,
-        val amount: BigInteger
+        val amount: BigDecimal
 ) : Event(PAID_FOR_SHARE_HOLDER)
 
 data class PaymentCompletedEvent(
         val customerAddress: String,
-        val transactionAmount: BigInteger,
+        val transactionAmount: BigDecimal,
         val scaffoldTransactionIndex: BigInteger,
         val properties: Map<String, Any>
 ) : Event(PAYMENT_COMPLETED)
