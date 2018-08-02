@@ -23,4 +23,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Get all transactions API
 
 [Unreleased]: https://github.com/OpenFuturePlatform/open-api-jvm-sdk/compare/master...sprint
+[1.0.0]: https://github.com/OpenFuturePlatform/open-api-jvm-sdk/compare/v1.0.1...v1.0.0
 [1.0.0]: https://github.com/OpenFuturePlatform/open-api-jvm-sdk/compare/ae7d29394dcfae8567ca715dceba5f1967d22f00...v1.0.0
