@@ -10,15 +10,15 @@ import org.junit.Test
 import org.mockito.BDDMockito.given
 import org.mockito.Mockito.`when`
 
-class ShareHolderSenderTests: SenderTests() {
+class EthereumShareHolderSenderTests: SenderTests() {
 
-    private val sender: ShareHolderSender = ShareHolderSender(token, "address")
+    private val sender: EthereumShareHolderSender = EthereumShareHolderSender(token, "address")
 
 
     @Test
     fun addShouldReturnSummary() {
         given(statusLine.statusCode).willReturn(HttpStatus.SC_OK)
-        `when`(EntityUtils.toString(entity)).thenReturn(createScaffoldSummaryJson())
+        `when`(EntityUtils.toString(entity)).thenReturn(createEthereumScaffoldSummaryJson())
 
         sender.add(createAddHolderRequest())
     }
@@ -26,7 +26,7 @@ class ShareHolderSenderTests: SenderTests() {
     @Test
     fun updateShouldReturnSummary() {
         given(statusLine.statusCode).willReturn(HttpStatus.SC_OK)
-        `when`(EntityUtils.toString(entity)).thenReturn(createScaffoldSummaryJson())
+        `when`(EntityUtils.toString(entity)).thenReturn(createEthereumScaffoldSummaryJson())
 
         sender.update(createUpdateHolderRequest())
     }
@@ -34,12 +34,12 @@ class ShareHolderSenderTests: SenderTests() {
     @Test
     fun removeShouldReturnSummary() {
         given(statusLine.statusCode).willReturn(HttpStatus.SC_OK)
-        `when`(EntityUtils.toString(entity)).thenReturn(createScaffoldSummaryJson())
+        `when`(EntityUtils.toString(entity)).thenReturn(createEthereumScaffoldSummaryJson())
 
         sender.remove(createRemoveHolderRequest())
     }
 
-    private fun createScaffoldJson() = """{
+    private fun createEthereumScaffoldJson() = """{
                     "address": "0x1c297f40beb075936d6dbe4b245b92736667ecb1",
                     "user": {
                         "id": 1,
@@ -68,8 +68,8 @@ class ShareHolderSenderTests: SenderTests() {
                     "enabled": false
                 }"""
 
-    private fun createScaffoldSummaryJson() = """{
-                    "scaffold": ${createScaffoldJson()},
+    private fun createEthereumScaffoldSummaryJson() = """{
+                    "ethereumScaffold": ${createEthereumScaffoldJson()},
                     "transactionIndex": 0,
                     "vendorAddress": "0xdc29484cc9c02ee01015f33bca8bbb5c7293fb54",
                     "tokenBalance": 0,

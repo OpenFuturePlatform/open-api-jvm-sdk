@@ -2,17 +2,22 @@ package io.openfuture.sdk.domain.response
 
 import com.fasterxml.jackson.core.type.TypeReference
 import io.openfuture.sdk.domain.PageResponse
-import io.openfuture.sdk.domain.scaffold.Scaffold
-import io.openfuture.sdk.domain.scaffold.ScaffoldQuota
-import io.openfuture.sdk.domain.scaffold.ScaffoldSummary
-import io.openfuture.sdk.domain.transaction.Transaction
+import io.openfuture.sdk.domain.scaffold.EthereumScaffold
+import io.openfuture.sdk.domain.scaffold.EthereumScaffoldQuota
+import io.openfuture.sdk.domain.scaffold.EthereumScaffoldSummary
+import io.openfuture.sdk.domain.scaffold.OpenScaffold
+import io.openfuture.sdk.domain.transaction.EhereumTransaction
 
-class ScaffoldResponse : TypeReference<Scaffold>()
+class EthereumScaffoldResponse : TypeReference<EthereumScaffold>()
 
-class ScaffoldPageResponse : TypeReference<PageResponse<Scaffold>>()
+class EthereumScaffoldPageResponse : TypeReference<PageResponse<EthereumScaffold>>()
 
-class ScaffoldSummaryResponse : TypeReference<ScaffoldSummary>()
+class EthereumScaffoldSummaryResponse : TypeReference<EthereumScaffoldSummary>()
 
-class ScaffoldQuotaResponse : TypeReference<ScaffoldQuota>()
+class EthereumScaffoldQuotaResponse : TypeReference<EthereumScaffoldQuota>()
 
-class TransactionPageResponse : TypeReference<PageResponse<Transaction>>()
+class EthereumTransactionPageResponse : TypeReference<PageResponse<EhereumTransaction>>()
+
+class OpenScaffoldPageResponse : TypeReference<PageResponse<OpenScaffold>>()
+
+class OpenScaffoldResponse : TypeReference<OpenScaffold>()

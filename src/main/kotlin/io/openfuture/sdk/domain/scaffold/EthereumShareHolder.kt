@@ -3,8 +3,7 @@ package io.openfuture.sdk.domain.scaffold
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-class ScaffoldProperty(
-        val name: String,
-        val type: PropertyType,
-        val defaultValue: String? = null
+data class EthereumShareHolder(
+        val address: String,
+        val percent: Int
 )

@@ -1,8 +1,9 @@
 package io.openfuture.sdk
 
-import io.openfuture.sdk.sender.ScaffoldSender
-import io.openfuture.sdk.sender.ShareHolderSender
-import io.openfuture.sdk.sender.TransactionSender
+import io.openfuture.sdk.sender.EthereumScaffoldSender
+import io.openfuture.sdk.sender.EthereumShareHolderSender
+import io.openfuture.sdk.sender.EthereumTransactionSender
+import io.openfuture.sdk.sender.OpenScaffoldSender
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
@@ -21,31 +22,39 @@ class OpenJTests {
 
 
     @Test
-    fun scaffoldShouldReturnScaffoldSender() {
-        val scaffoldSender = openJ.scaffold()
+    fun ethereumScaffoldShouldReturnScaffoldSender() {
+        val scaffoldSender = openJ.ethereumScaffold()
 
-        assertThat(scaffoldSender::class).hasSameClassAs(ScaffoldSender::class)
-        assertThat(scaffoldSender).isEqualToComparingOnlyGivenFields(ScaffoldSender(token), "token")
+        assertThat(scaffoldSender::class).hasSameClassAs(EthereumScaffoldSender::class)
+        assertThat(scaffoldSender).isEqualToComparingOnlyGivenFields(EthereumScaffoldSender(token), "token")
     }
 
     @Test
-    fun transactionShouldReturnTransactionSender() {
+    fun ethereumTransactionShouldReturnTransactionSender() {
         val scaffoldAddress = "address"
-        val transactionSender = openJ.transaction(scaffoldAddress)
+        val transactionSender = openJ.ethereumTransaction(scaffoldAddress)
 
-        assertThat(transactionSender::class).hasSameClassAs(TransactionSender::class)
+        assertThat(transactionSender::class).hasSameClassAs(EthereumTransactionSender::class)
         assertThat(transactionSender)
-                .isEqualToComparingOnlyGivenFields(TransactionSender(token, scaffoldAddress), "token", "openRoute")
+                .isEqualToComparingOnlyGivenFields(EthereumTransactionSender(token, scaffoldAddress), "token", "openRoute")
     }
 
     @Test
-    fun shareHolderShouldReturnShareHolderSender() {
+    fun ethereumShareHolderShouldReturnShareHolderSender() {
         val scaffoldAddress = "address"
-        val shareHolderSender = openJ.shareHolder(scaffoldAddress)
+        val shareHolderSender = openJ.ethereumShareHolder(scaffoldAddress)
 
-        assertThat(shareHolderSender::class).hasSameClassAs(ShareHolderSender::class)
+        assertThat(shareHolderSender::class).hasSameClassAs(EthereumShareHolderSender::class)
         assertThat(shareHolderSender)
-                .isEqualToComparingOnlyGivenFields(ShareHolderSender(token, scaffoldAddress), "token", "openRoute")
+                .isEqualToComparingOnlyGivenFields(EthereumShareHolderSender(token, scaffoldAddress), "token", "openRoute")
+    }
+
+    @Test
+    fun openScaffoldShouldReturnOpenScaffoldSender() {
+        val sender = openJ.openScaffold()
+
+        assertThat(sender::class).hasSameClassAs(OpenScaffoldSender::class)
+        assertThat(sender).isEqualToComparingOnlyGivenFields(OpenScaffoldSender(token), "token")
     }
 
 }
