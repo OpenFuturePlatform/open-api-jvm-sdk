@@ -65,21 +65,21 @@ list      |T[]   | List of entities with type T (T is generic)
 
 ### Scaffold
 
-#### Scaffold attributes
+#### Ethereum scaffold attributes
 
-Attribute       | Type                                                | Description
-----------------|-----------------------------------------------------|-----------
-address         |String                                               | Scaffold address
-abi             |String                                               | Scaffold json interface
-description     |String                                               | Scaffold description
-fiatAmount      |String                                               | Scaffold fiat amount
-currency        |String                                               | Fiat amount currency
-conversionAmount|String                                               | Fiat amount converted to ethereum 
-developerAddress|String                                               | Scaffold developer address
-webHook         |String                                               | Scaffold webhook for events
-properties      |[ScaffoldProperty](#scaffold-properties-attributes)[]| Scaffold properties
+Attribute       | Type                                                                 | Description
+----------------|----------------------------------------------------------------------|-----------
+address         |String                                                                | Scaffold address
+abi             |String                                                                | Scaffold json interface
+description     |String                                                                | Scaffold description
+fiatAmount      |String                                                                | Scaffold fiat amount
+currency        |String                                                                | Fiat amount currency
+conversionAmount|String                                                                | Fiat amount converted to ethereum 
+developerAddress|String                                                                | Scaffold developer address
+webHook         |String                                                                | Scaffold webhook for events
+properties      |[EthereumScaffoldProperty](#ethereum-scaffold-properties-attributes)[]| Ethereum scaffold properties
 
-#### Scaffold properties attributes
+#### Ethereum scaffold properties attributes
 
 Attribute   | Type       | Description
 ------------|------------|-----------
@@ -87,81 +87,95 @@ name        |String      | Property name
 type        |PropertyType| Property type
 defaultValue|String      | Property default value
 
-#### Scaffold summary attributes
+#### Ethereum scaffold summary attributes
 
-Attribute       | Type                                                | Description
-----------------|-----------------------------------------------------|-----------
-scaffold        |[Scaffold](#scaffold-attributes)                     | Scaffold
-transactionIndex|BigInteger                                           | Transaction index
-tokenBalance    |BigInteger                                           | Scaffold token balance
-enabled         |Boolean                                              | Scaffold enabled
-currency        |String                                               | Fiat amount currency
-shareHolders    |[ShareHolder](#share-holder-attributes)              | Scaffold share holders
+Attribute       | Type                                                  | Description
+----------------|-------------------------------------------------------|-----------
+scaffold        |[EthereumScaffold](#ethereum-scaffold-attributes)      | Ethereum scaffold
+transactionIndex|BigInteger                                             | Transaction index
+tokenBalance    |BigInteger                                             | Scaffold token balance
+enabled         |Boolean                                                | Scaffold enabled
+currency        |String                                                 | Fiat amount currency
+shareHolders    |[EthereumShareHolder](#ethereum-shareholder-attributes)| Ethereum scaffold share holders
 
-#### Quota attributes
+#### Ethereum scaffold quota attributes
 
 Attribute       | Type                                                | Description
 ----------------|-----------------------------------------------------|-----------
 currentCount    |Int                                                  | Current deactivated scaffolds count
 limitCount      |Int                                                  | Limit of deactivated scaffolds count
 
-#### Deploy scaffold request
+#### Deploy ethereum scaffold request
 
-Attribute       | Type                                                | Description
-----------------|-----------------------------------------------------|-----------
-openKey         |String                                               | User open key
-description     |String                                               | Scaffold description
-fiatAmount      |String                                               | Scaffold fiat amount
-currency        |String                                               | Fiat amount currency
-conversionAmount|String                                               | Fiat amount converted to ethereum 
-developerAddress|String                                               | Scaffold developer address
-webHook         |String                                               | Scaffold webhook for events
-properties      |[ScaffoldProperty](#scaffold-properties-attributes)[]| Scaffold properties
+Attribute       | Type                                                                 | Description
+----------------|----------------------------------------------------------------------|-------------
+openKey         |String                                                                | User open key
+description     |String                                                                | Scaffold description
+fiatAmount      |String                                                                | Scaffold fiat amount
+currency        |String                                                                | Fiat amount currency
+conversionAmount|String                                                                | Fiat amount converted to ethereum 
+developerAddress|String                                                                | Scaffold developer address
+webHook         |String                                                                | Scaffold webhook for events
+properties      |[EthereumScaffoldProperty](#ethereum-scaffold-properties-attributes)[]| Ethereum scaffold properties
 
 #### Set web hook request
 
 Attribute       | Type                                                | Description
 ----------------|-----------------------------------------------------|-----------
-address         |String                                               | Scaffold address
-webHook         |String                                               | Scaffold webhook for events
+address         |String                                               | Ethereum scaffold address
+webHook         |String                                               | Ethereum scaffold webhook for events
 
+#### Open scaffold attributes
+
+Attribute       | Type                                                                 | Description
+----------------|----------------------------------------------------------------------|-----------
+description     |String                                                                | Scaffold description
+developerAddress|String                                                                | Scaffold developer address
+webHook         |String                                                                | Scaffold webhook
+
+#### Save open scaffold request
+
+Attribute       | Type                                                | Description
+----------------|-----------------------------------------------------|-----------
+address         |String                                               | Ethereum shareholder address
+percent 
 
 ### Shareholder
 
-#### Shareholder attributes
+#### Ethereum shareholder attributes
 
 Attribute       | Type                                                | Description
 ----------------|-----------------------------------------------------|-----------
-address         |String                                               | Shareholder address
-percent         |Int                                                  | Shareholder percent
+address         |String                                               | Ethereum shareholder address
+percent         |Int                                                  | Ethereum shareholder percent
 
-#### Add shareholder request
-
-Attribute       | Type                                                | Description
-----------------|-----------------------------------------------------|-----------
-address         |String                                               | Shareholder address
-percent         |Int                                                  | Shareholder percent
-
-#### Update shareholder request
+#### Add ethereum shareholder request
 
 Attribute       | Type                                                | Description
 ----------------|-----------------------------------------------------|-----------
-address         |String                                               | Shareholder address
-percent         |Int                                                  | Shareholder percent
+address         |String                                               | Ethereum shareholder address
+percent         |Int                                                  | Ethereum shareholder percent
 
-#### Remove shareholder request
+#### Update ethereum shareholder request
 
 Attribute       | Type                                                | Description
 ----------------|-----------------------------------------------------|-----------
-address         |String                                               | Shareholder address
+address         |String                                               | Ethereum shareholder address
+percent         |Int                                                  | Ethereum shareholder percent
+
+#### Remove ethereum shareholder request
+
+Attribute       | Type                                                | Description
+----------------|-----------------------------------------------------|-----------
+address         |String                                               | Ethereum shareholder address
 
 ### Transaction
 
-#### Transaction attributes
+#### Ethereum transaction attributes
 
 Attribute       | Type                                                | Description
 ----------------|-----------------------------------------------------|-----------
-scaffold        |[Scaffold](#scaffold-attributes)                     | Scaffold
+scaffold        |[EthereumScaffold](#ethereum-scaffold-attributes)    | Ethereum scaffold
 event           |[Event](#event)                                      | Event
 
 
@@ -169,14 +183,14 @@ event           |[Event](#event)                                      | Event
 
 Each event has field `type` which define an event type
 
-#### Activate scaffold event
+#### Activate ethereum scaffold event
 
 Attribute       | Type                                                | Description
 ----------------|-----------------------------------------------------|-----------
-activated       |Boolean                                              |Scaffold state
+activated       |Boolean                                              |Ethereum scaffold state
 type            |String                                               |"ACTIVATED_SCAFFOLD"
 
-#### Added share holder event
+#### Added ethereum share holder event
 
 Attribute       | Type                                                | Description
 ----------------|-----------------------------------------------------|-----------
@@ -184,14 +198,14 @@ userAddress     |String                                               |Share hol
 partnerShare    |BigInteger                                           |Share holder share
 type            |String                                               |"ADDED_SHARE_HOLDER"
 
-#### Delete share holder event
+#### Delete ethereum share holder event
 
 Attribute       | Type                                                | Description
 ----------------|-----------------------------------------------------|-----------
 userAddress     |String                                               |Share holder address
 type            |String                                               |"DELETED_SHARE_HOLDER"
 
-#### Edit share holder event
+#### Edit ethereum share holder event
 
 Attribute       | Type                                                | Description
 ----------------|-----------------------------------------------------|-----------
@@ -199,7 +213,7 @@ userAddress     |String                                               |Sharehold
 partnerShare    |BigInteger                                           |Shareholder share
 type            |String                                               |"EDITED_SHARE_HOLDER"
 
-#### Funds deposited event
+#### Ethereum funds deposited event
 
 Attribute       | Type                                                | Description
 ----------------|-----------------------------------------------------|-----------
@@ -207,7 +221,7 @@ amount          |BigInteger                                           |Funds amo
 toAddress       |String                                               |To address
 type            |String                                               |"FUNDS_DEPOSITED"
 
-#### Paid for shareholder event
+#### Paid for ethereum shareholder event
 
 Attribute       | Type                                                | Description
 ----------------|-----------------------------------------------------|-----------
@@ -231,16 +245,17 @@ type                    |String                                               |"
 
 `sender` - an object that produces requests for each entity type
 
+## Ethereum scaffold
 ### Scaffold
 
 > Kotlin:
 ```kotlin
-val sender = open.scaffold()
+val sender = open.ethereumScaffold()
 ```
 
 > Java:
 ```java
-ScaffoldSender sender = open.scaffold()
+EthereumScaffoldSender sender = open.ethereumScaffold()
 ```
 
 #### Get All
@@ -254,10 +269,10 @@ val scaffolds = sender.getAll()
 
 > Java:
 ```java
-PageResponse<Scaffold> scaffolds = sender.getAll()
+PageResponse<EthereumScaffold> scaffolds = sender.getAll()
 ```
 
-`Response entity is` [PageResponse](#page-response-attributes) `with param` [Scaffold](#scaffold-attributes)
+`Response entity is` [PageResponse](#page-response-attributes) `with param` [EthereumScaffold](#ethereum-scaffold-attributes)
 
 #### Get one
 
@@ -268,30 +283,30 @@ val scaffold = sender.get(address)
 
 > Java:
 ```java
-Scaffold scaffold = sender.get(address)
+EthereumScaffold scaffold = sender.get(address)
 ```
 
-`address` - `Scaffold address`
+`address` - `Ethereum scaffold address`
 
-`Response entity is` [Scaffold](#scaffold-attributes)
+`Response entity is` [EthereumScaffold](#ethereum-scaffold-attributes)
 
 #### Deploy
 
 > Kotlin:
 ```kotlin
-val scaffold = sender.deploy(DeployScaffoldRequest(openKey, developerAddress, description, fiatAmount, currency, 
+val scaffold = sender.deploy(DeployEthereumScaffoldRequest(openKey, developerAddress, description, fiatAmount, currency, 
                                                    conversionAmount, properties, webHook))
 ```
 
 > Java:
 ```java
-Scaffold scaffold = sender.deploy(new DeployScaffoldRequest(openKey, developerAddress, description, fiatAmount, currency, 
+EthereumScaffold scaffold = sender.deploy(new DeployEthereumScaffoldRequest(openKey, developerAddress, description, fiatAmount, currency, 
                                                    conversionAmount, properties, webHook))
 ```
 
-`Request entity is` [DeployScaffoldRequest](#deploy-scaffold-request)
+`Request entity is` [DeployEthereumScaffoldRequest](#deploy-ethereum-scaffold-request)
 
-`Response entity is` [Scaffold](#scaffold-attributes)
+`Response entity is` [EthereumScaffold](#ethereum-scaffold-attributes)
 
 #### Set webhook
 
@@ -302,12 +317,12 @@ val scaffold = sender.setWebHook(SetWebHookRequest(address, webHook))
 
 > Java:
 ```java
-Scaffold scaffold = sender.setWebHook(new SetWebHookRequest(address, webHook))
+EthereumScaffold scaffold = sender.setWebHook(new SetWebHookRequest(address, webHook))
 ```
 
 `Request entity is` [SetWebHookRequest](#set-web-hook-request)
 
-`Response entity is` [Scaffold](#scaffold-attributes)
+`Response entity is` [EthereumScaffold](#ethereum-scaffold-attributes)
 
 #### Get summary
 
@@ -318,12 +333,12 @@ val summary = sender.summary(address)
 
 > Java:
 ```java
-ScaffoldSummary summary = sender.summary(address)
+EthereumScaffoldSummary summary = sender.summary(address)
 ```
 
-`address` - `Scaffold address`
+`address` - `Ethereum scaffold address`
 
-`Response entity is` [ScaffoldSummary](#scaffold-summary-attributes)
+`Response entity is` [EthereumScaffoldSummary](#ethereum-scaffold-summary-attributes)
 
 #### Deactivate 
 
@@ -334,12 +349,12 @@ val summary = sender.deactivate(address)
 
 > Java:
 ```java
-ScaffoldSummary summary = sender.deactivate(address)
+EthereumScaffoldSummary summary = sender.deactivate(address)
 ```
 
-`address` - `Scaffold address`
+`address` - `Ethereum scaffold address`
 
-`Response entity is` [ScaffoldSummary](#scaffold-summary-attributes)
+`Response entity is` [EthereumScaffoldSummary](#ethereum-scaffold-summary-attributes)
 
 #### Get quota
 
@@ -350,25 +365,25 @@ val quota = sender.quota()
 
 > Java:
 ```java
-ScaffoldQuota quota = sender.quota()
+EthereumScaffoldQuota quota = sender.quota()
 ```
 
-`Response entity is` [ScaffoldQuota](#quota-attributes)
+`Response entity is` [EthereumScaffoldQuota](#ethereum-scaffold-quota-attributes)
 
 
 ### Shareholder
 
 > Kotlin:
 ```kotlin
-val sender = open.shareHolder(address)
+val sender = open.EthereumShareHolderSender(address)
 ```
 
 > Java:
 ```java
-ShareHolderSender sender = open.shareHolder(address)
+EthereumShareHolderSender sender = open.EthereumShareHolderSender(address)
 ```
 
-`address` - `Scaffold address`
+`address` - `Ethereum scaffold address`
 
 #### Add
 
@@ -379,12 +394,12 @@ val summary = sender.add(AddShareHolderRequest(address, percent))
 
 > Java:
 ```java
-ScaffoldSummary summary = sender.add(new AddShareHolderRequest(address, percent))
+EthereumScaffoldSummary summary = sender.add(new AddShareHolderRequest(address, percent))
 ```
 
-`Request entity is` [AddShareHolderRequest](#add-share-holder-request)
+`Request entity is` [AddEthereumShareHolderRequest](#add-ethereum-shareholder-request)
 
-`Response entity is` [ScaffoldSummary](#scaffold-summary-attributes)
+`Response entity is` [EthereumScaffoldSummary](#ethereum-scaffold-summary-attributes)
 
 #### Update
 
@@ -395,12 +410,12 @@ val summary = sender.add(UpdateShareHolderRequest(address, percent))
 
 > Java:
 ```java
-ScaffoldSummary summary = sender.add(new UpdateShareHolderRequest(address, percent))
+EthereumScaffoldSummary summary = sender.add(new UpdateShareHolderRequest(address, percent))
 ```
 
-`Request entity is` [UpdateShareHolderRequest](#update-share-holder-request)
+`Request entity is` [UpdateEthereumShareHolderRequest](#update-ethereum-shareholder-request)
 
-`Response entity is` [ScaffoldSummary](#scaffold-summary-attributes)
+`Response entity is` [EthereumScaffoldSummary](#ethereum-scaffold-summary-attributes)
 
 #### Remove
 
@@ -411,24 +426,24 @@ val summary = sender.add(RemoveShareHolderRequest(address))
 
 > Java:
 ```java
-ScaffoldSummary summary = sender.add(new RemoveShareHolderRequest(address))
+EthereumScaffoldSummary summary = sender.add(new RemoveShareHolderRequest(address))
 ```
 
-`Request entity is` [RemoveShareHolderRequest](#remove-share-holder-request)
+`Request entity is` [RemoveEthereumShareHolderRequest](#remove-ethereum-shareholder-request)
 
-`Response entity is` [ScaffoldSummary](#scaffold-summary-attributes)
+`Response entity is` [EthereumScaffoldSummary](#ethereum-scaffold-summary-attributes)
 
 
-### Transaction
+### Ethereum transaction
 
 > Kotlin:
 ```kotlin
-val sender = open.transaction(address)
+val sender = open.ethereumTransaction(address)
 ```
 
 > Java:
 ```java
-TransactionSender sender = open.transaction(address)
+EthereumTransactionSender sender = open.ethereumTransaction(address)
 ```
 
 `address` - `Scaffold address`
@@ -444,9 +459,58 @@ val transactions = sender.getAll()
 
 > Java:
 ```java
-PageResponse<Transaction> transactions = sender.getAll()
+PageResponse<EhereumTransaction> transactions = sender.getAll()
 ```
 
-`Response entity is` [PageResponse](#page-response-attributes) `with param` [Transaction](#transaction-attributes)
+`Response entity is` [PageResponse](#page-response-attributes) `with param` [EthereumTransaction](#ethereum-transaction-attributes)
+
+
+
+
+## Open scaffold
+### Scaffold
+
+> Kotlin:
+```kotlin
+val sender = open.openScaffold()
+```
+
+> Java:
+```java
+OpenScaffoldSender sender = open.openScaffold()
+```
+
+#### Get all
+
+`Can be used with` [page request](#page-request-attributes)
+
+> Kotlin:
+```kotlin
+val scaffolds = sender.getAll()
+```
+
+> Java:
+```java
+PageResponse<OpenScaffold> scaffolds = sender.getAll()
+```
+
+`Response entity is` [PageResponse](#page-response-attributes) `with param` [OpenScaffold](#open-scaffold-attributes)
+
+
+#### Create
+
+> Kotlin:
+```kotlin
+val scaffold = sender.create(SaveOpenScaffoldRequest(openKey, developerAddress, description, webHook))
+```
+
+> Java:
+```java
+OpenScaffold scaffold = sender.create(new SaveOpenScaffoldRequest(openKey, developerAddress, description, webHook))
+```
+
+`Request entity is` [SaveOpenScaffoldRequest](#save-open-scaffold-request)
+
+`Response entity is` [OpenScaffold](#open-scaffold-attributes)
 
 

@@ -8,14 +8,14 @@ import org.junit.Test
 import org.mockito.BDDMockito.given
 import org.mockito.Mockito.`when`
 
-class TransactionSenderTests: SenderTests() {
+class EthereumTransactionSenderTests: SenderTests() {
 
-    private val sender: TransactionSender = TransactionSender(token, "address")
+    private val sender: EthereumTransactionSender = EthereumTransactionSender(token, "address")
 
     @Test
     fun getAllShouldReturnPageResponseOfTransactions() {
         given(statusLine.statusCode).willReturn(HttpStatus.SC_OK)
-        `when`(EntityUtils.toString(entity)).thenReturn(createTransactionPageResponseJson())
+        `when`(EntityUtils.toString(entity)).thenReturn(createEthereumTransactionPageResponseJson())
 
         val actual = sender.getAll()
 
@@ -23,14 +23,14 @@ class TransactionSenderTests: SenderTests() {
         assertThat(actual.list).hasSize(1)
     }
 
-    private fun createTransactionPageResponseJson() = """{
+    private fun createEthereumTransactionPageResponseJson() = """{
             "totalCount": 1,
             "list": [
-                ${createTransactionJson()}
+                ${createEthereumTransactionJson()}
             ]}"""
 
-    private fun createTransactionJson() = """{
-                    "scaffold": ${createScaffoldJson()},
+    private fun createEthereumTransactionJson() = """{
+                    "ethereumScaffold": ${createEthereumScaffoldJson()},
                     "event": {
                       "activated": false,
                       "type": "ACTIVATED_SCAFFOLD"
@@ -38,7 +38,7 @@ class TransactionSenderTests: SenderTests() {
                     "date":"2018-06-13"
                 }"""
 
-    private fun createScaffoldJson() = """{
+    private fun createEthereumScaffoldJson() = """{
                     "address": "0x1c297f40beb075936d6dbe4b245b92736667ecb1",
                     "user": {
                         "id": 1,

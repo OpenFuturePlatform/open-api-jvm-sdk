@@ -1,17 +1,20 @@
 package io.openfuture.sdk
 
-import io.openfuture.sdk.sender.ScaffoldSender
-import io.openfuture.sdk.sender.ShareHolderSender
-import io.openfuture.sdk.sender.TransactionSender
+import io.openfuture.sdk.sender.EthereumScaffoldSender
+import io.openfuture.sdk.sender.EthereumShareHolderSender
+import io.openfuture.sdk.sender.EthereumTransactionSender
+import io.openfuture.sdk.sender.OpenScaffoldSender
 
 class OpenJ(
         private val token: String
 ) {
 
-    fun scaffold() = ScaffoldSender(token)
+    fun ethereumScaffold() = EthereumScaffoldSender(token)
 
-    fun transaction(address: String) = TransactionSender(token, address)
+    fun ethereumTransaction(address: String) = EthereumTransactionSender(token, address)
 
-    fun shareHolder(address: String) = ShareHolderSender(token, address)
+    fun ethereumShareHolder(address: String) = EthereumShareHolderSender(token, address)
+
+    fun openScaffold() = OpenScaffoldSender(token)
 
 }

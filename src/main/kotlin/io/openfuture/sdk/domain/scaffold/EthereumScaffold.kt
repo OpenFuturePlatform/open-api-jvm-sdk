@@ -3,7 +3,7 @@ package io.openfuture.sdk.domain.scaffold
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-data class Scaffold(
+data class EthereumScaffold(
         val address: String,
         val abi: String,
         val description: String,
@@ -12,5 +12,5 @@ data class Scaffold(
         val conversionAmount: String,
         val developerAddress: String,
         val webHook: String?,
-        val properties: List<ScaffoldProperty>
+        val properties: List<EthereumScaffoldProperty>
 )

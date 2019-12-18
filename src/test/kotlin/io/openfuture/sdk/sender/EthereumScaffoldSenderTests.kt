@@ -2,7 +2,7 @@ package io.openfuture.sdk.sender
 
 import io.openfuture.sdk.config.SenderTests
 import io.openfuture.sdk.domain.scaffold.Currency.USD
-import io.openfuture.sdk.domain.scaffold.DeployScaffoldRequest
+import io.openfuture.sdk.domain.scaffold.DeployEthereumScaffoldRequest
 import io.openfuture.sdk.domain.scaffold.SetWebHookRequest
 import io.openfuture.sdk.exception.ClientException
 import io.openfuture.sdk.exception.ServerException
@@ -13,15 +13,15 @@ import org.junit.Test
 import org.mockito.BDDMockito.given
 import org.mockito.Mockito.`when`
 
-class ScaffoldSenderTests : SenderTests() {
+class EthereumScaffoldSenderTests : SenderTests() {
 
-    private val sender: ScaffoldSender = ScaffoldSender(token)
+    private val sender: EthereumScaffoldSender = EthereumScaffoldSender(token)
 
 
     @Test
     fun getAllShouldReturnPageResponseOfScaffolds() {
         given(statusLine.statusCode).willReturn(SC_OK)
-        `when`(EntityUtils.toString(entity)).thenReturn(createScaffoldPageResponseJson())
+        `when`(EntityUtils.toString(entity)).thenReturn(createEthereumScaffoldPageResponseJson())
 
         val actual = sender.getAll()
 
@@ -32,7 +32,7 @@ class ScaffoldSenderTests : SenderTests() {
     @Test
     fun getShouldReturnScaffold() {
         given(statusLine.statusCode).willReturn(SC_OK)
-        `when`(EntityUtils.toString(entity)).thenReturn(createScaffoldJson())
+        `when`(EntityUtils.toString(entity)).thenReturn(createEthereumScaffoldJson())
 
         sender.get("address")
     }
@@ -40,7 +40,7 @@ class ScaffoldSenderTests : SenderTests() {
     @Test
     fun deployShouldReturnScaffold() {
         given(statusLine.statusCode).willReturn(SC_OK)
-        `when`(EntityUtils.toString(entity)).thenReturn(createScaffoldJson())
+        `when`(EntityUtils.toString(entity)).thenReturn(createEthereumScaffoldJson())
 
         sender.deploy(createDeployRequest())
     }
@@ -48,7 +48,7 @@ class ScaffoldSenderTests : SenderTests() {
     @Test
     fun setWebHookShouldReturnScaffold() {
         given(statusLine.statusCode).willReturn(SC_OK)
-        `when`(EntityUtils.toString(entity)).thenReturn(createScaffoldJson())
+        `when`(EntityUtils.toString(entity)).thenReturn(createEthereumScaffoldJson())
 
         sender.setWebHook(createSetWebHookRequest())
     }
@@ -56,7 +56,7 @@ class ScaffoldSenderTests : SenderTests() {
     @Test
     fun summaryShouldReturnScaffoldSummary() {
         given(statusLine.statusCode).willReturn(SC_OK)
-        `when`(EntityUtils.toString(entity)).thenReturn(createScaffoldSummaryJson())
+        `when`(EntityUtils.toString(entity)).thenReturn(createEthereumScaffoldSummaryJson())
 
         sender.summary("address")
     }
@@ -64,7 +64,7 @@ class ScaffoldSenderTests : SenderTests() {
     @Test
     fun deactivateShouldReturnScaffoldSummary() {
         given(statusLine.statusCode).willReturn(SC_OK)
-        `when`(EntityUtils.toString(entity)).thenReturn(createScaffoldSummaryJson())
+        `when`(EntityUtils.toString(entity)).thenReturn(createEthereumScaffoldSummaryJson())
 
         sender.deactivate("address")
     }
@@ -72,7 +72,7 @@ class ScaffoldSenderTests : SenderTests() {
     @Test
     fun quotaShouldReturnQuota() {
         given(statusLine.statusCode).willReturn(SC_OK)
-        `when`(EntityUtils.toString(entity)).thenReturn(createScaffoldQuotaJson())
+        `when`(EntityUtils.toString(entity)).thenReturn(createEthereumScaffoldQuotaJson())
 
         sender.quota()
     }
@@ -93,13 +93,13 @@ class ScaffoldSenderTests : SenderTests() {
     }
 
 
-    private fun createScaffoldPageResponseJson() = """{
+    private fun createEthereumScaffoldPageResponseJson() = """{
             "totalCount": 1,
             "list": [
-                ${createScaffoldJson()}
+                ${createEthereumScaffoldJson()}
             ]}"""
 
-    private fun createScaffoldJson() = """{
+    private fun createEthereumScaffoldJson() = """{
                     "address": "0x1c297f40beb075936d6dbe4b245b92736667ecb1",
                     "user": {
                         "id": 1,
@@ -128,8 +128,8 @@ class ScaffoldSenderTests : SenderTests() {
                     "enabled": false
                 }"""
 
-    private fun createScaffoldSummaryJson() = """{
-                    "scaffold": ${createScaffoldJson()},
+    private fun createEthereumScaffoldSummaryJson() = """{
+                    "ethereumScaffold": ${createEthereumScaffoldJson()},
                     "transactionIndex": 0,
                     "vendorAddress": "0xdc29484cc9c02ee01015f33bca8bbb5c7293fb54",
                     "tokenBalance": 0,
@@ -137,7 +137,7 @@ class ScaffoldSenderTests : SenderTests() {
                     "shareHolders":[]
                 }"""
 
-    private fun createScaffoldQuotaJson() = """{
+    private fun createEthereumScaffoldQuotaJson() = """{
                     "currentCount": 1,
                     "limitCount": 10
                 }"""
@@ -147,7 +147,7 @@ class ScaffoldSenderTests : SenderTests() {
                     "message": "Method Argument Not Valid"
                 }"""
 
-    private fun createDeployRequest() = DeployScaffoldRequest("ok", "devAdd", "desc", "1.9", USD, "0.2")
+    private fun createDeployRequest() = DeployEthereumScaffoldRequest("ok", "devAdd", "desc", "1.9", USD, "0.2")
 
     private fun createSetWebHookRequest() = SetWebHookRequest("add", "hook")
 
