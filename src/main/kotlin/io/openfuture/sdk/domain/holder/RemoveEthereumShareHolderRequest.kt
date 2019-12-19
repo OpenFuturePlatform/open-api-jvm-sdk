@@ -1,5 +1,5 @@
 package io.openfuture.sdk.domain.holder
 
-class RemoveShareHolderRequest(
+class RemoveEthereumShareHolderRequest(
         val address: String
 )

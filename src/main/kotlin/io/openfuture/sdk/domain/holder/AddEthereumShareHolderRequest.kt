@@ -1,6 +1,6 @@
 package io.openfuture.sdk.domain.holder
 
-class UpdateShareHolderRequest(
+class AddEthereumShareHolderRequest(
         val address: String,
         val percent: Int
 )

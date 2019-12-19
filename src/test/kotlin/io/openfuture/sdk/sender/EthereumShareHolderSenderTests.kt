@@ -1,9 +1,9 @@
 package io.openfuture.sdk.sender
 
 import io.openfuture.sdk.config.SenderTests
-import io.openfuture.sdk.domain.holder.AddShareHolderRequest
-import io.openfuture.sdk.domain.holder.RemoveShareHolderRequest
-import io.openfuture.sdk.domain.holder.UpdateShareHolderRequest
+import io.openfuture.sdk.domain.holder.AddEthereumShareHolderRequest
+import io.openfuture.sdk.domain.holder.RemoveEthereumShareHolderRequest
+import io.openfuture.sdk.domain.holder.UpdateEthereumShareHolderRequest
 import org.apache.http.HttpStatus
 import org.apache.http.util.EntityUtils
 import org.junit.Test
@@ -80,10 +80,10 @@ class EthereumShareHolderSenderTests: SenderTests() {
                     }]
                 }"""
 
-    private fun createAddHolderRequest() = AddShareHolderRequest("address", 1)
+    private fun createAddHolderRequest() = AddEthereumShareHolderRequest("address", 1)
 
-    private fun createUpdateHolderRequest() = UpdateShareHolderRequest("address", 1)
+    private fun createUpdateHolderRequest() = UpdateEthereumShareHolderRequest("address", 1)
 
-    private fun createRemoveHolderRequest() = RemoveShareHolderRequest("address")
+    private fun createRemoveHolderRequest() = RemoveEthereumShareHolderRequest("address")
 
 }

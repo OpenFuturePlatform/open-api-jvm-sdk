@@ -127,18 +127,20 @@ webHook         |String                                               | Ethereum
 
 #### Open scaffold attributes
 
-Attribute       | Type                                                                 | Description
-----------------|----------------------------------------------------------------------|-----------
-description     |String                                                                | Scaffold description
-developerAddress|String                                                                | Scaffold developer address
-webHook         |String                                                                | Scaffold webhook
+Attribute       | Type  | Description
+----------------|-------|-----------
+description     |String | Scaffold description
+developerAddress|String | Scaffold developer address
+webHook         |String | Scaffold webhook
 
 #### Save open scaffold request
 
-Attribute       | Type                                                | Description
-----------------|-----------------------------------------------------|-----------
-address         |String                                               | Ethereum shareholder address
-percent 
+Attribute       | Type   | Description
+----------------|--------|------------
+openKey         | String | User open key
+developerAddress| String | Scaffold developer address
+description     | String | Scaffold description
+webHook         | String | Scaffold webhook
 
 ### Shareholder
 
@@ -389,12 +391,12 @@ EthereumShareHolderSender sender = open.EthereumShareHolderSender(address)
 
 > Kotlin:
 ```kotlin
-val summary = sender.add(AddShareHolderRequest(address, percent))
+val summary = sender.add(AddEthereumShareHolderRequest(address, percent))
 ```
 
 > Java:
 ```java
-EthereumScaffoldSummary summary = sender.add(new AddShareHolderRequest(address, percent))
+EthereumScaffoldSummary summary = sender.add(new AddEthereumShareHolderRequest(address, percent))
 ```
 
 `Request entity is` [AddEthereumShareHolderRequest](#add-ethereum-shareholder-request)
@@ -405,12 +407,12 @@ EthereumScaffoldSummary summary = sender.add(new AddShareHolderRequest(address, 
 
 > Kotlin:
 ```kotlin
-val summary = sender.add(UpdateShareHolderRequest(address, percent))
+val summary = sender.add(UpdateEthereumShareHolderRequest(address, percent))
 ```
 
 > Java:
 ```java
-EthereumScaffoldSummary summary = sender.add(new UpdateShareHolderRequest(address, percent))
+EthereumScaffoldSummary summary = sender.add(new UpdateEthereumShareHolderRequest(address, percent))
 ```
 
 `Request entity is` [UpdateEthereumShareHolderRequest](#update-ethereum-shareholder-request)
@@ -421,12 +423,12 @@ EthereumScaffoldSummary summary = sender.add(new UpdateShareHolderRequest(addres
 
 > Kotlin:
 ```kotlin
-val summary = sender.add(RemoveShareHolderRequest(address))
+val summary = sender.add(RemoveEthereumShareHolderRequest(address))
 ```
 
 > Java:
 ```java
-EthereumScaffoldSummary summary = sender.add(new RemoveShareHolderRequest(address))
+EthereumScaffoldSummary summary = sender.add(new RemoveEthereumShareHolderRequest(address))
 ```
 
 `Request entity is` [RemoveEthereumShareHolderRequest](#remove-ethereum-shareholder-request)
